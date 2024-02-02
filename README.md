@@ -21,7 +21,7 @@ preparation tool. The application includes the following features:
 
 This project is of interest to me because, as a student, I regularly use flashcards to help me study and prepare for 
 examinations. I wish to create an application that would help me create and keep track of my study habits, as well as
-provide this resource to other students and learners.
+provide this resource to other students and learners. 
 
 
 
