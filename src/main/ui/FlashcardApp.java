@@ -5,8 +5,6 @@ import model.Flashcard;
 import model.FlashcardDeck;
 import model.FlashcardDecks;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 // Application for Flashcard Program references the TellerApp
@@ -79,7 +77,6 @@ public class FlashcardApp {
 
     private void createNewDeck() {
         boolean keepCreateNewDeckGoing = true;
-        int goBack = 1;
 
         while (keepCreateNewDeckGoing) {
             System.out.println("Please enter the name of your new Flashcard Deck, press b to return to previous menu:");
@@ -91,35 +88,35 @@ public class FlashcardApp {
                 myFlashcardDecks.addFlashcardDeck(newDeck);
                 myFlashcardDecks.setCurrentFlashcardDeck(newDeck);
                 currentDeck = myFlashcardDecks.getCurrentFlashcardDeck();
-                runCurrentDeck(currentDeck);
+                runCurrentDeck();
             }
         }
     }
 
     private void selectAFlashcardDeck() {
         boolean keepSelectFlashcardDeckGoing = true;
-        int selection = -1;
+        //int selection = -1;
 
         while (keepSelectFlashcardDeckGoing) {
             System.out.println("Please select the number of the Flashcard Deck, press 0 to return to main menu:");
             for (FlashcardDeck f : myFlashcardDecks.getFlashcardDecks()) {
                 System.out.println(myFlashcardDecks.getPositionInList(f) + ": " + f.getName());
             }
-            selection = input.nextInt();
+            int selection = input.nextInt();
 
             if (selection == 0) {
                 keepSelectFlashcardDeckGoing = false;
             } else if (myFlashcardDecks.checkIfFlashcardDeckAtThisPosition(selection)) {
                 myFlashcardDecks.setCurrentFlashCardDeckBasedOnPositionInList(selection);
                 currentDeck = myFlashcardDecks.getCurrentFlashcardDeck();
-                runCurrentDeck(currentDeck);
+                runCurrentDeck();
             } else {
                 System.out.println("Selection not valid, please select another number");
             }
         }
     }
 
-    private void runCurrentDeck(FlashcardDeck deck) {
+    private void runCurrentDeck() {
         boolean keepRunCurrentDeckGoing = true;
         String deckCommand = null;
         //init();
@@ -163,9 +160,9 @@ public class FlashcardApp {
             editAFlashcard(currentDeck);
         } else if (command.equals("s")) {
             quiz(currentDeck);
-        }  else if (command.equals("x")) {
+        } else if (command.equals("x")) {
             removeFlashcardDeck(currentDeck);
-        }  else {
+        } else {
             System.out.println("Selection not valid...");
         }
     }
@@ -231,6 +228,7 @@ public class FlashcardApp {
 
     private void editAFlashcard(FlashcardDeck currentDeck) {
         int selection = -1;
+        //String yesNo = null;
         System.out.println("These are the current Flashcards in " + currentDeck.getName());
         for (Flashcard f : currentDeck.getFlashcards()) {
             System.out.println("Number " + currentDeck.getPositionOfCardInList(f) + ": " + f.getQuestion());
@@ -238,17 +236,23 @@ public class FlashcardApp {
         System.out.println("Please select a card number to edit");
         selection = input.nextInt();
         if (currentDeck.checkIfFlashcardAtThisPosition(selection)) {
-            currentCard = currentDeck.getCardFromIndex(selection + 1);
-            System.out.println("The card selected to be edited is: " + currentCard.getQuestion());
-            System.out.println("Press q to edit the question, Press a to edit the answer");
-            String yesNo = input.nextLine();
-            if (yesNo.equals("q")) {
-                editQuestion(currentCard);
-            } else if (yesNo.equals("a")) {
-                editAnswer(currentCard);
-            } else {
-                System.out.println("Please enter a valid input");
-            }
+            currentCard = currentDeck.getCardFromIndex(selection - 1);
+            selectQuestionOrAnswer(currentCard);
+        } else {
+            System.out.println("Please enter a valid input");
+        }
+    }
+
+    private void selectQuestionOrAnswer(Flashcard f) {
+        String yesNo = null;
+        System.out.println("The card selected to be edited is: " + currentCard.getQuestion());
+        System.out.println("Press q to edit the question, Press a to edit the answer");
+        input.nextLine();
+        yesNo = input.nextLine();
+        if (yesNo.equals("q")) {
+            editQuestion(f);
+        } else if (yesNo.equals("a")) {
+            editAnswer(f);
         }
     }
 
@@ -270,7 +274,6 @@ public class FlashcardApp {
         myFlashcardDecks.removeFlashcardDeck(f);
         currentDeck = null;
     }
-
 
 
 }
