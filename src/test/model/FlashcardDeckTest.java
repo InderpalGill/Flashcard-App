@@ -158,12 +158,14 @@ public class FlashcardDeckTest {
     @Test
     public void testGetPositionOfCardInList() {
         testFlashcardDeck.addCard(testFlashcard1);
+        assertEquals(0, testFlashcardDeck.getPositionOfCardInList(testFlashcard2));
         testFlashcardDeck.addCard(testFlashcard2);
         testFlashcardDeck.addCard(testFlashcard3);
         assertEquals(1, testFlashcardDeck.getPositionOfCardInList(testFlashcard1));
         assertEquals(2, testFlashcardDeck.getPositionOfCardInList(testFlashcard2));
         assertEquals(3, testFlashcardDeck.getPositionOfCardInList(testFlashcard3));
         testFlashcardDeck.removeCard(testFlashcard2);
+        assertEquals(0, testFlashcardDeck.getPositionOfCardInList(testFlashcard2));
         assertEquals(2, testFlashcardDeck.getPositionOfCardInList(testFlashcard3));
         testFlashcardDeck.addCard(testFlashcard2);
         assertEquals(3, testFlashcardDeck.getPositionOfCardInList(testFlashcard2));

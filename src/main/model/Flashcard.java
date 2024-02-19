@@ -7,52 +7,47 @@ public class Flashcard {
 
     private String question;
     private String answer;
-    private int cardNumber;
     private Boolean isCorrect;
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS: Constructor for class
+
+    //EFFECTS: Constructor for class. Creates flashcard with given question and answer, and isCorrect set to false
     public Flashcard(String question, String answer) {
         this.question = question;
         this.answer = answer;
         this.isCorrect = false;
     }
 
-    //EFFECTS: gets question for card
+    //EFFECTS: returns question for card
     public String getQuestion() {
         return question;
     }
 
-    //EFFECTS: gets answer for card
+    //EFFECTS: returns answer for card
     public String getAnswer() {
         return answer;
     }
 
-
-    //EFFECTS: Sets question for card
+    //MODIFIES: this
+    //EFFECTS: Sets the parameter value as the question for a card
     public void setQuestion(String newQuestion) {
         this.question = newQuestion;
     }
 
-    //EFFECTS: sets answer for card
+    //MODIFIES: this
+    //EFFECTS: Sets the parameter value as the answer for a card
     public void setAnswer(String newAnswer) {
         this.answer = newAnswer;
     }
 
-
-    //MODIFIES:
-    //EFFECTS: gets if card is returned correct
+    //EFFECTS: returns getIsCorrect field for a card
     public Boolean getIsCorrect() {
         return isCorrect;
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //MODIFIES: this
+    //EFFECTS: Sets the isCorrect field for a card to the parameter value
     public void setIsCorrect(Boolean b) {
         this.isCorrect = b;
     }
-
 
 }

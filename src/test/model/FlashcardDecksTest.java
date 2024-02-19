@@ -31,13 +31,13 @@ public class FlashcardDecksTest {
     @Test
     public void testConstructor() {
         assertEquals(0, testFlashcardDecks.getSizeFlashcardDecks());
-        assertEquals(null, testFlashcardDecks.getCurrentFlashcardDeck());
+        assertNull(testFlashcardDecks.getCurrentFlashcardDeck());
     }
 
     @Test
     public void testAddFlashcardDeck() {
         assertEquals(0, testFlashcardDecks.getSizeFlashcardDecks());
-        assertEquals(null, testFlashcardDecks.getCurrentFlashcardDeck());
+        assertNull(testFlashcardDecks.getCurrentFlashcardDeck());
         testFlashcardDecks.addFlashcardDeck(testFlashcardDeck1);
         assertEquals(1, testFlashcardDecks.getSizeFlashcardDecks());
         testFlashcardDecks.addFlashcardDeck(testFlashcardDeck2);
@@ -127,11 +127,11 @@ public class FlashcardDecksTest {
 
     @Test
     public void testSetCurrentFlashCardDeckBasedOnPositionInList() {
-        assertEquals(null, testFlashcardDecks.getCurrentFlashcardDeck());
+        assertNull(testFlashcardDecks.getCurrentFlashcardDeck());
         testFlashcardDecks.addFlashcardDeck(testFlashcardDeck1);
         testFlashcardDecks.addFlashcardDeck(testFlashcardDeck2);
         testFlashcardDecks.addFlashcardDeck(testFlashcardDeck3);
-        assertEquals(null, testFlashcardDecks.getCurrentFlashcardDeck());
+        assertNull(testFlashcardDecks.getCurrentFlashcardDeck());
         testFlashcardDecks.setCurrentFlashCardDeckBasedOnPositionInList(2);
         assertEquals(testFlashcardDeck2, testFlashcardDecks.getCurrentFlashcardDeck());
         testFlashcardDecks.setCurrentFlashCardDeckBasedOnPositionInList(1);
@@ -163,11 +163,11 @@ public class FlashcardDecksTest {
 
     @Test
     public void testGetCurrentFlashcardDeck() {
-        assertEquals(null, testFlashcardDecks.getCurrentFlashcardDeck());
+        assertNull(testFlashcardDecks.getCurrentFlashcardDeck());
         testFlashcardDecks.addFlashcardDeck(testFlashcardDeck1);
         testFlashcardDecks.addFlashcardDeck(testFlashcardDeck2);
         testFlashcardDecks.addFlashcardDeck(testFlashcardDeck3);
-        assertEquals(null, testFlashcardDecks.getCurrentFlashcardDeck());
+        assertNull(testFlashcardDecks.getCurrentFlashcardDeck());
         testFlashcardDecks.setCurrentFlashcardDeck(testFlashcardDeck2);
         assertEquals(testFlashcardDeck2, testFlashcardDecks.getCurrentFlashcardDeck());
         testFlashcardDecks.setCurrentFlashcardDeck(testFlashcardDeck3);
@@ -206,6 +206,27 @@ public class FlashcardDecksTest {
         assertEquals(testFlashcardDeck3, testFlashcardDecks.getFlashcardDeckFromPosition(3));
         testFlashcardDecks.removeFlashcardDeck(testFlashcardDeck1);
         assertEquals(testFlashcardDeck2, testFlashcardDecks.getFlashcardDeckFromPosition(1));
+    }
+
+    @Test
+    public void testGetFlashcardDecks() {
+        assertTrue(testFlashcardDecks.getFlashcardDecks().isEmpty());
+        testFlashcardDecks.addFlashcardDeck(testFlashcardDeck1);
+        assertEquals(1, testFlashcardDecks.getSizeFlashcardDecks());
+        assertFalse(testFlashcardDecks.getFlashcardDecks().isEmpty());
+        assertTrue(testFlashcardDecks.getFlashcardDecks().contains(testFlashcardDeck1));
+        testFlashcardDecks.addFlashcardDeck(testFlashcardDeck2);
+        assertEquals(2, testFlashcardDecks.getSizeFlashcardDecks());
+        assertFalse(testFlashcardDecks.getFlashcardDecks().isEmpty());
+        assertTrue(testFlashcardDecks.getFlashcardDecks().contains(testFlashcardDeck2));
+        testFlashcardDecks.addFlashcardDeck(testFlashcardDeck3);
+        assertEquals(3, testFlashcardDecks.getSizeFlashcardDecks());
+        assertFalse(testFlashcardDecks.getFlashcardDecks().isEmpty());
+        assertTrue(testFlashcardDecks.getFlashcardDecks().contains(testFlashcardDeck3));
+        testFlashcardDecks.removeFlashcardDeck(testFlashcardDeck2);
+        assertEquals(2, testFlashcardDecks.getSizeFlashcardDecks());
+        assertFalse(testFlashcardDecks.getFlashcardDecks().isEmpty());
+        assertFalse(testFlashcardDecks.getFlashcardDecks().contains(testFlashcardDeck2));
     }
 
 }

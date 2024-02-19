@@ -7,25 +7,24 @@ import model.FlashcardDecks;
 
 import java.util.Scanner;
 
-// Application for Flashcard Program references the TellerApp
+// Application for Flashcard Program
+// References the TellerApp for how to create menu displays and set up and use Scanner
+//https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 public class FlashcardApp {
-    private FlashcardDeck deck;  //for demonstration
-    private Flashcard flashcard; //for demonstration
+
     private Scanner input;
     private FlashcardDecks myFlashcardDecks;
     private FlashcardDeck currentDeck;
     private Flashcard currentCard;
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+
+    //EFFECTS: Constructor for class. Creates a new instance of FlashcardApp which starts with runFlashcardApp()
     public FlashcardApp() {
         runFlashcardApp();
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //MODIFIES: this
+    //EFFECTS: Launches app, and processes user input displayed on main menu
     private void runFlashcardApp() {
         boolean keepGoing = true;
 
@@ -45,15 +44,15 @@ public class FlashcardApp {
         System.out.println("\nGoodbye!");
     }
 
-    //REQUIRES:
     // MODIFIES: this
     // EFFECTS: initializes the program and creates a sample Flashcard deck for demonstration
+    //initializes the scanner
     private void init() {
         myFlashcardDecks = new FlashcardDecks();
-        deck = new FlashcardDeck("year");
-        flashcard = new Flashcard("What year is it?", "2024");
-        deck.addCard(flashcard);
-        //myFlashcardDecks.addFlashcardDeck(deck);
+        FlashcardDeck deck = new FlashcardDeck("year"); //for demonstration
+        Flashcard flashcard = new Flashcard("What year is it?", "2024"); //for demonstration
+        deck.addCard(flashcard); // for demonstration
+        myFlashcardDecks.addFlashcardDeck(deck); //for demonstration
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -81,9 +80,8 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //MODIFIES: this
+    //EFFECTS: Creates a new FlashcardDeck and asks for a title.
     private void createNewDeck() {
         System.out.println("Please enter the name of your new Flashcard Deck, press b to return to previous menu:");
         input.nextLine();
@@ -99,9 +97,10 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: myFlashcardDecks size > 0
+    //MODIFIES: this
+    //EFFECTS: Allows user to look through all Flashcard Decks, and select one. Displays a list of all FlashcardDecks,
+    // uses user input to determine which FlashcardDeck to select.
     private void selectAFlashcardDeck() {
         if (myFlashcardDecks.getSizeFlashcardDecks() == 0) {
             System.out.println("There are no Flashcard Decks to select from");
@@ -127,9 +126,10 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: currentFlashcardDeck is not null
+    //MODIFIES: this
+    //EFFECTS: Launches options for currentDeck. Takes user input to determine which option user would like to proceed
+    //with
     private void runCurrentDeck() {
         boolean keepRunCurrentDeckGoing = true;
 
@@ -146,9 +146,7 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //EFFECTS: Displays menu of options for user to select their next input.
     private void displayCurrentDeckMenu() {
         System.out.println("\nPlease select what you would like to do with Flashcard Deck: " + currentDeck.getName());
         System.out.println("\n" + currentDeck.getName() + ": currently has " + currentDeck.getSizeTracker() + " cards");
@@ -161,9 +159,9 @@ public class FlashcardApp {
         System.out.println("\tq -> Go back to previous menu");
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: currentDeck has a FlashcardDeck assigned
+    //MODIFIES: this
+    //EFFECTS: Processes user input String to select which methods to call for currentDeck
     private void processCurrentDeckCommand(String command) {
         if (command.equals("d")) {
             System.out.println("The current Flashcards in this deck are:");
@@ -186,22 +184,28 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: FlashcardDeck size >0
+    //MODIFIES: this
+    //EFFECTS: starts a quiz for selected flashcard deck. Goes through each card in a FlashcardDeck one at a time.
+    // Prints the correctness score to console. Resets all cards at end
     private void quiz(FlashcardDeck deck) {
-        for (int index = 0; index < deck.deckSize(); index++) {
-            currentCard = deck.getCardFromIndex(index);
-            deck.setCurrentCard(currentCard);
-            askQuestion(currentCard);
+        if (deck.deckSize() == 0) {
+            System.out.println("This flashcard deck is empty, cannot run a quiz");
+        } else {
+            for (int index = 0; index < deck.deckSize(); index++) {
+                currentCard = deck.getCardFromIndex(index);
+                deck.setCurrentCard(currentCard);
+                askQuestion(currentCard);
+            }
+            System.out.println("The score for this study session is:" + deck.getPercentCorrect() + "%");
+            currentDeck.resetCards();
         }
-        System.out.println("The score for this study session is:" + deck.getPercentCorrect() + "%");
-        currentDeck.resetCards();
     }
 
     //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //MODIFIES: this
+    //EFFECTS: uses user input during study session to display question of given flashcard, and display answer. User can
+    // select if they got particular card correct or incorrect using input.
     private void askQuestion(Flashcard f) {
         System.out.println(f.getQuestion());
         System.out.println("Press y to see answer, press any other key to skip answer");
@@ -220,9 +224,8 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
     //MODIFIES:
-    //EFFECTS:
+    //EFFECTS: Creates new Flashcard using user input for question and answer
     private void createANewFlashcard() {
         Boolean keepGoing = true;
         while (keepGoing) {
@@ -246,9 +249,9 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: currentDeck size > 0
+    //MODIFIES: this
+    //EFFECTS: uses user input to select and remove a Flashcard from myFlashcardDecks
     private void selectAFlashcardToRemove(FlashcardDeck currentDeck) {
         if (currentDeck.getSizeTracker() == 0) {
             System.out.println("There are no cards in this deck");
@@ -262,16 +265,16 @@ public class FlashcardApp {
             if (currentDeck.checkIfFlashcardAtThisPosition(selection)) {
                 currentCard = currentDeck.getCardFromIndex(selection - 1);
                 currentDeck.removeCard(currentCard);
-                System.out.println(currentCard + "has been removed from deck " + currentDeck.getName());
+                System.out.println(currentCard.getQuestion() + " has been removed from deck " + currentDeck.getName());
             } else {
                 System.out.println(selection + " is not a valid choice, please select again");
             }
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: currentDeck size >0
+    //MODIFIES: this
+    //EFFECTS: user input to change the question or answer of a flashcard
     private void editAFlashcard(FlashcardDeck currentDeck) {
         if (currentDeck.getSizeTracker() == 0) {
             System.out.println("There are no Flashcards in this deck to edit");
@@ -291,9 +294,9 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: currentDeck size > 0
+    //MODIFIES: this
+    //EFFECTS: Processes user command to edit either question of a flashcard, or the answer
     private void selectQuestionOrAnswer(Flashcard f) {
         System.out.println("The card selected to be edited is: " + currentCard.getQuestion());
         System.out.println("Press q to edit the question, Press a to edit the answer");
@@ -307,9 +310,9 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: currentCard to be selected
+    //MODIFIES: this
+    //EFFECTS: Prompts user to type a string which replaces the question for given flashcard
     private void editQuestion(Flashcard f) {
         System.out.println("Please enter the new question:");
         String question = input.nextLine();
@@ -317,9 +320,9 @@ public class FlashcardApp {
         System.out.println(f.getQuestion() + " is now the new question for this card");
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: currentCard to be selected
+    //MODIFIES: this
+    //EFFECTS: Prompts user to type a string which replaces the answer for given flashcard
     private void editAnswer(Flashcard f) {
         System.out.println("Please enter the new answer:");
         String answer = input.nextLine();
@@ -327,9 +330,9 @@ public class FlashcardApp {
         System.out.println(f.getAnswer() + " is now the new answer for this card");
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+    //REQUIRES: myFlashcardDecks size >0
+    //MODIFIES: this
+    //EFFECTS: user input to select and delete a FlashcardDeck
     private void deleteFlashcardDeck() {
         if (myFlashcardDecks.getSizeFlashcardDecks() == 0) {
             System.out.println("There are currently no Flashcard Decks");
@@ -351,9 +354,9 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES:
-    //MODIFIES:
-    //EFFECTS:
+
+    //MODIFIES: this
+    //EFFECTS: Prompts users to type in string to replace the name of a FlashcardDeck
     private void changeName(FlashcardDeck f) {
         System.out.println("Please type in the new name for this deck");
         input.nextLine();
