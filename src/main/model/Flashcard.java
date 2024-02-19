@@ -47,6 +47,9 @@ public class Flashcard {
         return isCorrect;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public void setIsCorrect(Boolean b) {
         this.isCorrect = b;
     }

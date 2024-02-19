@@ -152,7 +152,7 @@ public class FlashcardDeckTest {
         assertFalse(testFlashcard1.getIsCorrect());
         assertFalse(testFlashcard3.getIsCorrect());
         assertEquals(0, testFlashcardDeck.getCorrectTracker());
-        assertEquals(null, testFlashcardDeck.getCurrentCard());
+        assertNull(testFlashcardDeck.getCurrentCard());
     }
 
     @Test
@@ -187,7 +187,40 @@ public class FlashcardDeckTest {
         testFlashcardDeck.removeCard(testFlashcard3);
         testFlashcardDeck.removeCard(testFlashcard2);
         assertFalse(testFlashcardDeck.checkIfFlashcardAtThisPosition(1));
+    }
 
+    @Test
+    public void testGetPercentCorrect() {
+        testFlashcardDeck.addCard(testFlashcard1);
+        testFlashcardDeck.addCard(testFlashcard2);
+        testFlashcardDeck.setCurrentCard(testFlashcard1);
+        assertEquals(2, testFlashcardDeck.deckSize());
+        assertEquals(2, testFlashcardDeck.getSizeTracker());
+        assertEquals (0, testFlashcardDeck.getCorrectTracker());
+        testFlashcardDeck.markCardCorrect();
+        assertEquals(1, testFlashcardDeck.getCorrectTracker());
+        assertTrue(testFlashcard1.getIsCorrect());
+        assertEquals(50, testFlashcardDeck.getPercentCorrect());
+        testFlashcardDeck.setCurrentCard(testFlashcard2);
+        testFlashcardDeck.markCardCorrect();
+        assertEquals(100, testFlashcardDeck.getPercentCorrect());
+    }
 
+    @Test
+    public void testSetName() {
+        assertEquals("test", testFlashcardDeck.getName());
+        testFlashcardDeck.setName("Scooby Doo");
+        assertEquals("Scooby Doo", testFlashcardDeck.getName());
+    }
+
+    @Test
+    public void testDeckSize() {
+        assertEquals(0, testFlashcardDeck.deckSize());
+        testFlashcardDeck.addCard(testFlashcard1);
+        assertEquals(1, testFlashcardDeck.deckSize());
+        testFlashcardDeck.addCard(testFlashcard2);
+        assertEquals(2, testFlashcardDeck.deckSize());
+        testFlashcardDeck.removeCard(testFlashcard2);
+        assertEquals(1, testFlashcardDeck.deckSize());
     }
 }

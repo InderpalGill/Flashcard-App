@@ -15,14 +15,23 @@ public class FlashcardDecks {
         this.currentFlashcardDeck = null;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public void addFlashcardDeck(FlashcardDeck f) {
         myFlashcardDecks.add(f);
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public void removeFlashcardDeck(FlashcardDeck f) {
         myFlashcardDecks.remove(f);
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public int getPositionInList(FlashcardDeck f) {
         for (FlashcardDeck d : myFlashcardDecks) {
             if (d == f) {
@@ -32,6 +41,9 @@ public class FlashcardDecks {
         return -1;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public int getPositionInList(String name) {
         for (FlashcardDeck d : myFlashcardDecks) {
             if (d.getName().equals(name)) {
@@ -41,6 +53,9 @@ public class FlashcardDecks {
         return -1;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public boolean checkIfFlashcardDeckAtThisPosition(int index) {
         if ((index <= myFlashcardDecks.size()) && (index != 0))  {
             return myFlashcardDecks.get(index - 1) instanceof FlashcardDeck;
@@ -48,6 +63,9 @@ public class FlashcardDecks {
         return false;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public void setCurrentFlashCardDeckBasedOnPositionInList(int index) {
         for (FlashcardDeck d : myFlashcardDecks) {
             if (index == (myFlashcardDecks.indexOf(d) + 1)) {
@@ -56,20 +74,38 @@ public class FlashcardDecks {
         }
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
+    public FlashcardDeck getFlashcardDeckFromPosition(int position) {
+        return myFlashcardDecks.get(position - 1);
+    }
+
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public int getSizeFlashcardDecks() {
         return myFlashcardDecks.size();
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public FlashcardDeck getCurrentFlashcardDeck() {
         return currentFlashcardDeck;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public void setCurrentFlashcardDeck(FlashcardDeck f) {
         this.currentFlashcardDeck = f;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public List<FlashcardDeck> getFlashcardDecks() {
         return myFlashcardDecks;
     }
-
 }

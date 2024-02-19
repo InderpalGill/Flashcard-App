@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Represents a deck which can hold many flashcards
-// INVARIANT: flashcardDeck and cardTracker, always have same number of elements,
-// index of a particular flashcard in flashcardDeck == index of card in cardTracker
 public class FlashcardDeck {
 
     private ArrayList<Flashcard> flashcardDeck;
-    private int correctTracker;
-    private int sizeTracker;
-    private int percentCorrect;
+    private double correctTracker;
+    private double sizeTracker;
     private Flashcard currentCard;
     private String name;
 
@@ -26,12 +23,18 @@ public class FlashcardDeck {
         this.sizeTracker = 0;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public void addCard(String question, String answer) {
         Flashcard newCard = new Flashcard(question, answer);
         flashcardDeck.add(newCard);
         sizeTracker += 1;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public void addCard(Flashcard f) {
         flashcardDeck.add(f);
         sizeTracker += 1;
@@ -71,10 +74,16 @@ public class FlashcardDeck {
         name = s;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public int getPositionOfCardInList(Flashcard f) {
         return (flashcardDeck.indexOf(f) + 1);
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public Boolean checkIfFlashcardAtThisPosition(int index) {
         if ((index <= flashcardDeck.size()) && (index != 0)) {
             return flashcardDeck.get(index - 1) instanceof Flashcard;
@@ -95,35 +104,59 @@ public class FlashcardDeck {
         currentCard = null;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public List<Flashcard> getFlashcards() {
         return flashcardDeck;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public Flashcard getCurrentCard() {
         return currentCard;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public String getName() {
         return name;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public Flashcard getCardFromIndex(int index) {
         return flashcardDeck.get(index);
     }
 
-    public int getPercentCorrect() {
-        percentCorrect = (((correctTracker) / (sizeTracker)) * 100);
-        return percentCorrect;
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
+    public double getPercentCorrect() {
+        double correct = ((correctTracker / sizeTracker) * 100);
+        return correct;
     }
 
-    public int getCorrectTracker() {
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
+    public double getCorrectTracker() {
         return correctTracker;
     }
 
-    public int getSizeTracker() {
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
+    public double getSizeTracker() {
         return sizeTracker;
     }
 
+    //REQUIRES:
+    //MODIFIES:
+    //EFFECTS:
     public int deckSize() {
         return flashcardDeck.size();
     }

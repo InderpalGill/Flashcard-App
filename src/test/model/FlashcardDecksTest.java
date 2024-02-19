@@ -194,7 +194,18 @@ public class FlashcardDecksTest {
         testFlashcardDecks.removeFlashcardDeck(testFlashcardDeck1);
         testFlashcardDecks.removeFlashcardDeck(testFlashcardDeck3);
         assertFalse(testFlashcardDecks.checkIfFlashcardDeckAtThisPosition(1));
+    }
 
+    @Test
+    public void testGetFlashcardDeckFromPosition() {
+        testFlashcardDecks.addFlashcardDeck(testFlashcardDeck1);
+        testFlashcardDecks.addFlashcardDeck(testFlashcardDeck2);
+        testFlashcardDecks.addFlashcardDeck(testFlashcardDeck3);
+        assertEquals(testFlashcardDeck1, testFlashcardDecks.getFlashcardDeckFromPosition(1));
+        assertEquals(testFlashcardDeck2, testFlashcardDecks.getFlashcardDeckFromPosition(2));
+        assertEquals(testFlashcardDeck3, testFlashcardDecks.getFlashcardDeckFromPosition(3));
+        testFlashcardDecks.removeFlashcardDeck(testFlashcardDeck1);
+        assertEquals(testFlashcardDeck2, testFlashcardDecks.getFlashcardDeckFromPosition(1));
     }
 
 }
