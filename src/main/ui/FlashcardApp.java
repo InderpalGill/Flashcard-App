@@ -260,7 +260,7 @@ public class FlashcardApp {
             for (Flashcard f : currentDeck.getFlashcards()) {
                 System.out.println("Number " + currentDeck.getPositionOfCardInList(f) + ": " + f.getQuestion());
             }
-            System.out.println("Please select a card number to remove");
+            System.out.println("Please select a card number to remove, press 0 to return to main menu");
             int selection = input.nextInt();
             if (currentDeck.checkIfFlashcardAtThisPosition(selection)) {
                 currentCard = currentDeck.getCardFromIndex(selection - 1);
