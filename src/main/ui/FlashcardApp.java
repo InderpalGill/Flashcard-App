@@ -4,7 +4,12 @@ package ui;
 import model.Flashcard;
 import model.FlashcardDeck;
 import model.FlashcardDecks;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Application for Flashcard Program
@@ -15,10 +20,13 @@ import java.util.Scanner;
 //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class FlashcardApp {
 
+    private static final String JSON_STORE = "./data/flashcardDecks.json";
     private Scanner input;
     private FlashcardDecks myFlashcardDecks;
     private FlashcardDeck currentDeck;
     private Flashcard currentCard;
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
 
     //EFFECTS: Constructor for class. Creates a new instance of FlashcardApp which starts with runFlashcardApp()
@@ -30,15 +38,18 @@ public class FlashcardApp {
     //EFFECTS: Launches app, and processes user input displayed on main menu
     private void runFlashcardApp() {
         boolean keepGoing = true;
-
-        init();
-
+        try {
+            init();
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to run application: file not found");
+        }
         while (keepGoing) {
             displayMenu();
             String command = input.next();
             command = command.toLowerCase();
 
             if (command.equals("q")) {
+                quitProcedure();
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -47,15 +58,24 @@ public class FlashcardApp {
         System.out.println("\nGoodbye!");
     }
 
+    //EFFECTS: Displays message prompting user to save before exiting
+    private void quitProcedure() {
+        System.out.println("Any unsaved data will be deleted, would you like to save?");
+        System.out.println("Press \"Y\" for yes, press any other key to exit without saving");
+        String yesNo = input.next();
+        yesNo = yesNo.toLowerCase();
+        if (yesNo.equals("y")) {
+            saveFlashcardDeck();
+        }
+    }
+
     // MODIFIES: this
     // EFFECTS: initializes the program and creates a sample Flashcard deck for demonstration
     //initializes the scanner
-    private void init() {
+    private void init() throws FileNotFoundException {
         myFlashcardDecks = new FlashcardDecks("My Flashcards");
-        FlashcardDeck deck = new FlashcardDeck("year"); //for demonstration
-        Flashcard flashcard = new Flashcard("What year is it?", "2024"); //for demonstration
-        deck.addCard(flashcard); // for demonstration
-        myFlashcardDecks.addFlashcardDeck(deck); //for demonstration
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         input = new Scanner(System.in);
         input.useDelimiter("\n");
     }
@@ -64,7 +84,9 @@ public class FlashcardApp {
     private void displayMenu() {
         System.out.println("\nWelcome to Flashcard App! Please select one of the following");
         System.out.println("\tc -> Create new Flashcard Deck");
-        System.out.println("\ts -> Select an existing Flashcard Deck");
+        System.out.println("\tp -> Select an existing Flashcard Deck");
+        System.out.println("\ts -> Save Flashcard Deck to file");
+        System.out.println("\tl -> Load Flashcard Deck from file");
         System.out.println("\td -> Delete a Flashcard Deck");
         System.out.println("\tq -> Quit the application");
     }
@@ -74,12 +96,40 @@ public class FlashcardApp {
     private void processCommand(String command) {
         if (command.equals("c")) {
             createNewDeck();
-        } else if (command.equals("s")) {
+        } else if (command.equals("p")) {
             selectAFlashcardDeck();
+        } else if (command.equals("l")) {
+            loadFlashcardDecks();
+        } else if (command.equals("s")) {
+            saveFlashcardDeck();
         } else if (command.equals("d")) {
             deleteFlashcardDeck();
         } else {
             System.out.println("Sorry, the key you have entered is not valid");
+        }
+    }
+
+    // MODIFIES: ./data/flashcardDecks.json
+    // EFFECTS: saves the workroom to file
+    private void saveFlashcardDeck() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(myFlashcardDecks);
+            jsonWriter.close();
+            System.out.println("Saved " + myFlashcardDecks.getName() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads FlashcardDecks from file
+    private void loadFlashcardDecks() {
+        try {
+            myFlashcardDecks = jsonReader.read();
+            System.out.println("Loaded " + myFlashcardDecks.getName() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
 
@@ -104,7 +154,7 @@ public class FlashcardApp {
     //MODIFIES: this
     //EFFECTS: Allows user to look through all Flashcard Decks, and select one. Displays a list of all FlashcardDecks,
     // uses user input to determine which FlashcardDeck to select.
-    private void selectAFlashcardDeck() {
+    private void selectAFlashcardDeck() throws InputMismatchException {
         if (myFlashcardDecks.getSizeFlashcardDecks() == 0) {
             System.out.println("There are no Flashcard Decks to select from");
         } else {
@@ -286,7 +336,7 @@ public class FlashcardApp {
             for (Flashcard f : currentDeck.getFlashcards()) {
                 System.out.println("Number " + currentDeck.getPositionOfCardInList(f) + ": " + f.getQuestion());
             }
-            System.out.println("Please select a card number to edit");
+            System.out.println("Please select a card number to edit, Press \"0\" to return to previous menu");
             int selection = input.nextInt();
             if (currentDeck.checkIfFlashcardAtThisPosition(selection)) {
                 currentCard = currentDeck.getCardFromIndex(selection - 1);

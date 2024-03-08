@@ -103,10 +103,14 @@ public class FlashcardDecks implements Writable {
         return myFlashcardDecks;
     }
 
+    //EFFECTS: returns name of myFlashcardDecks
     public String getName() {
         return this.name;
     }
 
+    //MODIFIES: this
+    //EFFECTS: Converts a FlashcardDecks object to a JSONObject allowing it to be saved to file. Uses key "name" to
+    //store this.name as value, uses "FlashcardDeck:" as key to store array of FlashcardDeck as value.
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -115,6 +119,8 @@ public class FlashcardDecks implements Writable {
         return json;
     }
 
+    //EFFECTS Creates a JSONArray, iterates through myFlashcardDecks and converts each FlashcardDeck in myFlashcardDecks
+    // to JSONObject, and adds it to JSONArray
     private JSONArray flashcardDeckToJson() {
         JSONArray jsonArray = new JSONArray();
         for (FlashcardDeck f : myFlashcardDecks) {

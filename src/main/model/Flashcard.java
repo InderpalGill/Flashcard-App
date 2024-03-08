@@ -57,6 +57,9 @@ public class Flashcard implements Writable {
     }
 
     @Override
+    //MODIFIES: this
+    //EFFECTS: Coverts Flashcard object to JSONObject, with keys being "Question" and "Answer", and values being
+    //this.question, and this,answer
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Question:", this.question);

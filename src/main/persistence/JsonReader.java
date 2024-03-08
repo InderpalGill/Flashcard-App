@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import org.json.*;
 
 
-// Represents a reader that reads a FlashcardDecks from JSON data stored in a file
+// Represents a reader that reads FlashcardDecks from JSON data stored in a file
 //references the JsonSerializationDemo project for how to create JsonReader, JsonWriter, and to how to develop
 //testing classes and tests for Json
 //https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
@@ -26,7 +26,7 @@ public class JsonReader {
         this.source = source;
     }
 
-    // EFFECTS: reads workroom from file and returns it;
+    // EFFECTS: reads FlashcardDecks from file and returns it;
     // throws IOException if an error occurs reading data from file
     public FlashcardDecks read() throws IOException {
         String jsonData = readFile(source);
@@ -64,6 +64,7 @@ public class JsonReader {
         }
     }
 
+    //MODIFIES: fd
     //EFFECTS: Creates a new FlashcardDeck that is added to FlashcardDecks,
     // parses JSON object for Flashcards to add to FlashcardDeck
     private void addFlashcardDeck(FlashcardDecks fd, JSONObject jsonObject) {

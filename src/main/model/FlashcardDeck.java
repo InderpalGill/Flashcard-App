@@ -157,7 +157,11 @@ public class FlashcardDeck implements Writable {
         return flashcardDeck.size();
     }
 
+
     @Override
+    //MODIFIES: this
+    //EFFECTS: Converts a FlashcardDeck object to a JSONObject allowing it to be saved to file. Uses key "Name:"
+    //to store this.name as value, uses key "Flashcards:" to store array of Flashcard as value.
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Name:", this.name);
@@ -165,6 +169,8 @@ public class FlashcardDeck implements Writable {
         return json;
     }
 
+    //EFFECTS Creates a JSONArray, iterates through flashcardDeck and converts each Flashcard in FlashcardDeck
+    // to JSONObject, and adds it to JSONArray
     private JSONArray flashcardToJson() {
         JSONArray jsonArray = new JSONArray();
 
