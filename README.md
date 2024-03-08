@@ -40,5 +40,9 @@ provide this resource to other students and learners.
 - As a user, I want to be able to edit and modify any Flashcards in a Flashcard Deck.
 - As a user, I want to be able to see statistics of how many Flashcards I answered correctly (or incorrectly) 
 after studying a Flashcard Deck.
+- As a user, I want to be able to save my Flashcard Decks. 
+- As a user, when I quit the program, I want to be reminded to save my Flashcard Decks to file and have the option to do
+so or not.
+- As a user, I want to be able to load my Flashcard Decks from a previously saved file.
 
   

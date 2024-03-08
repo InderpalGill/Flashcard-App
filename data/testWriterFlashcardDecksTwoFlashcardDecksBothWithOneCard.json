@@ -1,0 +1,19 @@
+{
+    "name": "My test decks",
+    "FlashcardDeck:": [
+        {
+            "Name:": "test deck1",
+            "Flashcards:": [{
+                "Question:": "What year is it?",
+                "Answer:": "2024"
+            }]
+        },
+        {
+            "Name:": "test deck2",
+            "Flashcards:": [{
+                "Question:": "What color is the sky?",
+                "Answer:": "Blue"
+            }]
+        }
+    ]
+}

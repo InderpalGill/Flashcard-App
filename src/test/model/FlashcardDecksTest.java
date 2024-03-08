@@ -1,9 +1,11 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 public class FlashcardDecksTest {
     private FlashcardDecks testFlashcardDecks;
@@ -16,7 +18,7 @@ public class FlashcardDecksTest {
 
     @BeforeEach
     public void runBefore() {
-        testFlashcardDecks = new FlashcardDecks();
+        testFlashcardDecks = new FlashcardDecks("test");
         testFlashcardDeck1 = new FlashcardDeck("Math test");
         testFlashcardDeck2 = new FlashcardDeck("Geography test");
         testFlashcardDeck3 = new FlashcardDeck("Science test");
@@ -32,6 +34,7 @@ public class FlashcardDecksTest {
     public void testConstructor() {
         assertEquals(0, testFlashcardDecks.getSizeFlashcardDecks());
         assertNull(testFlashcardDecks.getCurrentFlashcardDeck());
+        assertEquals("test", testFlashcardDecks.getName());
     }
 
     @Test
@@ -227,6 +230,16 @@ public class FlashcardDecksTest {
         assertEquals(2, testFlashcardDecks.getSizeFlashcardDecks());
         assertFalse(testFlashcardDecks.getFlashcardDecks().isEmpty());
         assertFalse(testFlashcardDecks.getFlashcardDecks().contains(testFlashcardDeck2));
+    }
+
+    @Test
+    public void testToJson() {
+        testFlashcardDecks.addFlashcardDeck(testFlashcardDeck1);
+        JSONObject testJsonObject;
+        testJsonObject = testFlashcardDecks.toJson();
+        assertEquals("test", testJsonObject.get("name"));
+        assertEquals ("[{\"Name:\":\"Math test\",\"Flashcards:\":[{\"Question:\":\"What is 1 + 1?\"," +
+                "\"Answer:\":\"2\"}]}]", testJsonObject.getJSONArray("FlashcardDeck:").toString());
     }
 
 }

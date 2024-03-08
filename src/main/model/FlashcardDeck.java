@@ -3,8 +3,15 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a deck which can hold many flashcards
-public class FlashcardDeck {
+//references the JsonSerializationDemo project for how to create JsonReader, JsonWriter, and to how to develop
+//testing classes and tests for Json
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+public class FlashcardDeck implements Writable {
 
     private final ArrayList<Flashcard> flashcardDeck;
     private double correctTracker;
@@ -94,7 +101,6 @@ public class FlashcardDeck {
         return false;
     }
 
-
     //MODIFIES: this
     //EFFECTS: resets all cards in deck to isCorrect = false
     //resets correctTracker to zero
@@ -151,5 +157,20 @@ public class FlashcardDeck {
         return flashcardDeck.size();
     }
 
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Name:", this.name);
+        json.put("Flashcards:", flashcardToJson());
+        return json;
+    }
 
+    private JSONArray flashcardToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Flashcard f : flashcardDeck) {
+            jsonArray.put(f.toJson());
+        }
+        return jsonArray;
+    }
 }

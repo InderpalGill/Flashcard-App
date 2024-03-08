@@ -1,8 +1,14 @@
 package model;
 
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a flashcard with card number, question, and answer, and if the user has marked they
 // got the card correct during study
-public class Flashcard {
+//references the JsonSerializationDemo project for how to create JsonReader, JsonWriter, and to how to develop
+//testing classes and tests for Json
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+public class Flashcard implements Writable {
 
 
     private String question;
@@ -48,6 +54,14 @@ public class Flashcard {
     //EFFECTS: Sets the isCorrect field for a card to the parameter value
     public void setIsCorrect(Boolean b) {
         this.isCorrect = b;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("Question:", this.question);
+        json.put("Answer:", this.answer);
+        return json;
     }
 
 }

@@ -6,11 +6,14 @@ import org.json.JSONObject;
 import java.io.*;
 
 
-//Represents a writer that writes JSON representation of workroom to file
+//Represents a writer that writes JSON representation of FlashcardDecks to file
+//references the JsonSerializationDemo project for how to create JsonReader, JsonWriter, and to how to develop
+//testing classes and tests for Json
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
-    private String destination;
+    private final String destination;
 
     // EFFECTS: constructs writer to write to destination file
     public JsonWriter(String destination) {
@@ -25,7 +28,7 @@ public class JsonWriter {
     }
 
     // MODIFIES: this
-    // EFFECTS: writes JSON representation of workroom to file
+    // EFFECTS: writes JSON representation of FlashcardDecks to file
     public void write(FlashcardDecks fd) {
         JSONObject json = fd.toJson();
         saveToFile(json.toString(TAB));

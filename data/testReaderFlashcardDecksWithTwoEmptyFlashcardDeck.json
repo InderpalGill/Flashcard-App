@@ -1,0 +1,13 @@
+{
+  "name": "My test decks",
+  "FlashcardDeck:": [
+    {
+      "Name:": "deck1",
+      "Flashcards:": []
+    },
+    {
+      "Name:": "deck2",
+      "Flashcards:": []
+    }
+  ]
+}

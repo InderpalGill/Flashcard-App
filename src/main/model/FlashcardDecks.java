@@ -3,16 +3,22 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 // Represents a collection of FlashcardDeck used for studying
-public class FlashcardDecks {
+public class FlashcardDecks implements Writable {
 
     private final ArrayList<FlashcardDeck> myFlashcardDecks;
     private FlashcardDeck currentFlashcardDeck;
+    private final String name;
 
     //EFFECTS: Constructor for class. Creates a list of FlashcardDecks with current selected FlashcardDeck set to null
-    public FlashcardDecks() {
+    public FlashcardDecks(String name) {
         myFlashcardDecks = new ArrayList<>();
         this.currentFlashcardDeck = null;
+        this.name = name;
     }
 
     //MODIFIES: this
@@ -95,5 +101,25 @@ public class FlashcardDecks {
     //EFFECTS: returns a list of all FlashcardDecks that are in myFlashcardDecks.
     public List<FlashcardDeck> getFlashcardDecks() {
         return myFlashcardDecks;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("name", name);
+        json.put("FlashcardDeck:", flashcardDeckToJson());
+        return json;
+    }
+
+    private JSONArray flashcardDeckToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (FlashcardDeck f : myFlashcardDecks) {
+            jsonArray.put(f.toJson());
+        }
+        return jsonArray;
     }
 }

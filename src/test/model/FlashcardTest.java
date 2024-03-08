@@ -1,5 +1,6 @@
 package model;
 
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -50,6 +51,14 @@ public class FlashcardTest {
         assertTrue(testFlashcard1.getIsCorrect());
         testFlashcard1.setIsCorrect(false);
         assertFalse(testFlashcard1.getIsCorrect());
+    }
+
+    @Test
+    public void testToJson() {
+        JSONObject testJsonObject;
+        testJsonObject = testFlashcard1.toJson();
+        assertEquals("What is 1 + 1?", testJsonObject.get("Question:"));
+        assertEquals("2", testJsonObject.get("Answer:"));
     }
 
 

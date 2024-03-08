@@ -10,6 +10,9 @@ import java.util.Scanner;
 // Application for Flashcard Program
 // References the TellerApp for how to create menu displays and set up and use Scanner
 //https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+//references the JsonSerializationDemo project for how to create JsonReader, JsonWriter, and to how to develop
+//testing classes and tests for Json
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class FlashcardApp {
 
     private Scanner input;
@@ -48,7 +51,7 @@ public class FlashcardApp {
     // EFFECTS: initializes the program and creates a sample Flashcard deck for demonstration
     //initializes the scanner
     private void init() {
-        myFlashcardDecks = new FlashcardDecks();
+        myFlashcardDecks = new FlashcardDecks("My Flashcards");
         FlashcardDeck deck = new FlashcardDeck("year"); //for demonstration
         Flashcard flashcard = new Flashcard("What year is it?", "2024"); //for demonstration
         deck.addCard(flashcard); // for demonstration

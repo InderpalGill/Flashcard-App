@@ -1,7 +1,10 @@
 package model;
 
+
+import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -224,5 +227,15 @@ public class FlashcardDeckTest {
         assertEquals(2, testFlashcardDeck.deckSize());
         testFlashcardDeck.removeCard(testFlashcard2);
         assertEquals(1, testFlashcardDeck.deckSize());
+    }
+
+    @Test
+    public void testToJson() {
+        testFlashcardDeck.addCard(testFlashcard1);
+        JSONObject testJsonObject;
+        testJsonObject = testFlashcardDeck.toJson();
+        assertEquals("test", testJsonObject.get("Name:"));
+        assertEquals("[{\"Question:\":\"What is 1 + 1?\",\"Answer:\":\"2\"}]",
+                testJsonObject.getJSONArray("Flashcards:").toString());
     }
 }
