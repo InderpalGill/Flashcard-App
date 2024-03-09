@@ -154,10 +154,17 @@ public class FlashcardApp {
     //MODIFIES: this
     //EFFECTS: Allows user to look through all Flashcard Decks, and select one. Displays a list of all FlashcardDecks,
     // uses user input to determine which FlashcardDeck to select.
-    private void selectAFlashcardDeck() throws InputMismatchException {
+    private void selectAFlashcardDeck() {
         if (myFlashcardDecks.getSizeFlashcardDecks() == 0) {
             System.out.println("There are no Flashcard Decks to select from");
         } else {
+            selectDeck();
+        }
+    }
+
+
+    private void selectDeck() throws InputMismatchException {
+        try {
             boolean keepSelectFlashcardDeckGoing = true;
             while (keepSelectFlashcardDeckGoing) {
                 System.out.println("Please select the number of the Flashcard Deck, press 0 to return to main menu:");
@@ -165,7 +172,6 @@ public class FlashcardApp {
                     System.out.println(myFlashcardDecks.getPositionInList(f) + ": " + f.getName());
                 }
                 int selection = input.nextInt();
-
                 if (selection == 0) {
                     keepSelectFlashcardDeckGoing = false;
                 } else if (myFlashcardDecks.checkIfFlashcardDeckAtThisPosition(selection)) {
@@ -176,6 +182,9 @@ public class FlashcardApp {
                     System.out.println("Selection not valid, please select another number");
                 }
             }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid key entry. Returning to main menu");
+            input.nextLine();
         }
     }
 
@@ -280,7 +289,7 @@ public class FlashcardApp {
     //MODIFIES:
     //EFFECTS: Creates new Flashcard using user input for question and answer
     private void createANewFlashcard() {
-        Boolean keepGoing = true;
+        boolean keepGoing = true;
         while (keepGoing) {
             System.out.println("Please type the Flashcard question");
             input.nextLine();
@@ -305,7 +314,7 @@ public class FlashcardApp {
     //REQUIRES: currentDeck size > 0
     //MODIFIES: this
     //EFFECTS: uses user input to select and remove a Flashcard from myFlashcardDecks
-    private void selectAFlashcardToRemove(FlashcardDeck currentDeck) {
+    private void selectAFlashcardToRemove(FlashcardDeck currentDeck) throws InputMismatchException {
         if (currentDeck.getSizeTracker() == 0) {
             System.out.println("There are no cards in this deck");
         } else {
@@ -328,7 +337,7 @@ public class FlashcardApp {
     //REQUIRES: currentDeck size >0
     //MODIFIES: this
     //EFFECTS: user input to change the question or answer of a flashcard
-    private void editAFlashcard(FlashcardDeck currentDeck) {
+    private void editAFlashcard(FlashcardDeck currentDeck) throws InputMismatchException {
         if (currentDeck.getSizeTracker() == 0) {
             System.out.println("There are no Flashcards in this deck to edit");
         } else {
@@ -386,24 +395,35 @@ public class FlashcardApp {
     //REQUIRES: myFlashcardDecks size >0
     //MODIFIES: this
     //EFFECTS: user input to select and delete a FlashcardDeck
-    private void deleteFlashcardDeck() {
+    private void deleteFlashcardDeck() throws InputMismatchException {
         if (myFlashcardDecks.getSizeFlashcardDecks() == 0) {
             System.out.println("There are currently no Flashcard Decks");
         } else {
-            System.out.println("Please select the number of the Flashcard Deck to delete,"
-                    + " press 0 to return to main menu:");
-            for (FlashcardDeck f : myFlashcardDecks.getFlashcardDecks()) {
-                System.out.println(myFlashcardDecks.getPositionInList(f) + ": " + f.getName());
-            }
+            displayFlashcardsToDelete();
+        }
+        try {
             int selection = input.nextInt();
             if (selection == 0) {
                 System.out.println("Returning to main menu");
             } else if (myFlashcardDecks.checkIfFlashcardDeckAtThisPosition(selection)) {
-                System.out.println("Deleting " + myFlashcardDecks.getFlashcardDeckFromPosition(selection).getName());
+                System.out.println("Deleting " + myFlashcardDecks.getFlashcardDeckFromPosition(selection)
+                        .getName());
                 myFlashcardDecks.removeFlashcardDeck(myFlashcardDecks.getFlashcardDeckFromPosition(selection));
             } else {
                 System.out.println("That is not a valid choice. Returning to main menu");
             }
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid key entry. Returning to main menu");
+            input.nextLine();
+        }
+    }
+
+
+    private void displayFlashcardsToDelete() {
+        System.out.println("Please select the number of the Flashcard Deck to delete,"
+                + " press 0 to return to main menu:");
+        for (FlashcardDeck f : myFlashcardDecks.getFlashcardDecks()) {
+            System.out.println(myFlashcardDecks.getPositionInList(f) + ": " + f.getName());
         }
     }
 
