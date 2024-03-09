@@ -150,10 +150,7 @@ public class FlashcardApp {
         }
     }
 
-    //REQUIRES: myFlashcardDecks size > 0
-    //MODIFIES: this
-    //EFFECTS: Allows user to look through all Flashcard Decks, and select one. Displays a list of all FlashcardDecks,
-    // uses user input to determine which FlashcardDeck to select.
+    //EFFECTS: Checks if there are FlashcardDecks to select from
     private void selectAFlashcardDeck() {
         if (myFlashcardDecks.getSizeFlashcardDecks() == 0) {
             System.out.println("There are no Flashcard Decks to select from");
@@ -162,7 +159,10 @@ public class FlashcardApp {
         }
     }
 
-
+    //REQUIRES: myFlashcardDecks size > 0
+    //MODIFIES: this
+    //EFFECTS:Allows user to look through all Flashcard Decks, and select one. Displays a list of all FlashcardDecks,
+    // uses user input to determine which FlashcardDeck to select. Throws and Catches InputMismatchException
     private void selectDeck() throws InputMismatchException {
         try {
             boolean keepSelectFlashcardDeckGoing = true;
@@ -286,7 +286,7 @@ public class FlashcardApp {
         }
     }
 
-    //MODIFIES:
+    //MODIFIES: this
     //EFFECTS: Creates new Flashcard using user input for question and answer
     private void createANewFlashcard() {
         boolean keepGoing = true;
@@ -419,6 +419,7 @@ public class FlashcardApp {
     }
 
 
+    //EFFECTS: Goes through list of FlashcardDecks and prints them out for user to select which to delete
     private void displayFlashcardsToDelete() {
         System.out.println("Please select the number of the Flashcard Deck to delete,"
                 + " press 0 to return to main menu:");
