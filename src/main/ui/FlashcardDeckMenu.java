@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 // Class that creates and represents a JPanel of menu of options to perform once a Flashcard Deck has been selected
+// references the AlarmSystemProject for how to create JPanels, and JButtons
+//https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 public class FlashcardDeckMenu extends JPanel {
     private final FlashcardProgramUI controller;
     private final FlashcardDeck currentDeck;

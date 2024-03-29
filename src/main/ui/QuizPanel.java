@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 //Class that represents a JPanel with options to quiz currentDeck. Contains the quiz method
+// references the AlarmSystemProject for how to create JPanels, and JButtons
+//https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 public class QuizPanel extends JPanel {
 
     private final FlashcardProgramUI controller;

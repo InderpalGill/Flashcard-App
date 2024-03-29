@@ -1,5 +1,8 @@
 package ui;
 
+//Enum of names for main buttons in application
+// references the AlarmSystemProject for how to create JButtons
+//https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 public enum ButtonNames {
     CREATE("Create a new Flashcard Deck"),
     SELECT("Select an existing Flashcard Deck"),

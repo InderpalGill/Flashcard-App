@@ -14,7 +14,7 @@ public class SplashScreen extends JFrame {
         setLocationRelativeTo(null); // Center the splash screen on the screen
         setVisible(true);
 
-        // Simulate some loading time
+        // loading time
         try {
             Thread.sleep(2000); // 2 seconds
         } catch (InterruptedException e) {

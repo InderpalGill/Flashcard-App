@@ -5,6 +5,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 // Class that creates and represents a JPanel of main menu options to select from when the application is started.
+// references the AlarmSystemProject for how to create JPanels, and JButtons
+//https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 public class MainMenu extends JPanel {
 
     private final FlashcardProgramUI controller;
@@ -16,6 +18,7 @@ public class MainMenu extends JPanel {
         this.setLayout(new BorderLayout());
         placeGreeting();
         placeButtons();
+        this.setOpaque(false);
     }
 
     //EFFECTS: Places greeting at top of JPanel, and also sets the BorderLayout

@@ -8,6 +8,8 @@ import java.awt.*;
 
 // JPanel class that displays a list of Flashcards in a Flashcard deck as buttons and lets users click on a Flashcard
 // they would like to edit.
+// references the AlarmSystemProject for how to create JPanels, and JButtons
+//https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 public class EditFlashcardsMenu extends JPanel {
 
     private final FlashcardProgramUI controller;

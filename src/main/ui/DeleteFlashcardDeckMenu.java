@@ -8,6 +8,8 @@ import java.awt.*;
 
 // JPanel class that represents a menu of options to choose from when the Delete button in main menu is pressed
 // Also contains method to delete a Flashcard Deck
+// references the AlarmSystemProject for how to create JPanels, and JButtons
+//https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 public class DeleteFlashcardDeckMenu extends JPanel {
 
     private final FlashcardProgramUI controller;

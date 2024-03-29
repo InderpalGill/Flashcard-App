@@ -12,6 +12,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 //Main UI class for displaying Flashcard App.
+//references the JsonSerializationDemo project for how to create JsonReader, JsonWriter, and to how to develop
+//testing classes and tests for Json
+//https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
+//references the AlarmSystem project for how to create JFrames, JPanels, and JButtons
+//https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 public class FlashcardProgramUI extends JFrame {
 
     private static final String JSON_STORE = "./data/flashcardDecks.json";
@@ -62,10 +67,13 @@ public class FlashcardProgramUI extends JFrame {
         return menu;
     }
 
+    //MODIFIES: this
+    //EFFECTS: sets mainMenu as menu
     private void setMainMenu() {
         mainMenu = menu;
     }
 
+    //EFFECTS: selects which menu to return to based on value of windowTracker
     protected void returnToPreviousMenu() {
         if (windowTracker < 4) {
             returnToMainMenu();

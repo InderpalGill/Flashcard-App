@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 // Class that creates and represents a JPanel of menu options to edit currentCard
+// references the AlarmSystemProject for how to create JPanels, and JButtons
+//https://github.students.cs.ubc.ca/CPSC210/AlarmSystem
 public class EditFlashcardMenu extends JPanel {
 
     private final FlashcardProgramUI controller;
