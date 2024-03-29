@@ -1,29 +1,20 @@
 {
     "name": "My Flashcards",
-    "FlashcardDeck:": [
-        {
-            "Name:": "Math Study Deck",
-            "Flashcards:": [
-                {
-                    "Question:": "What is 1 + 1?",
-                    "Answer:": "2"
-                },
-                {
-                    "Question:": "What are the first 6 digits of pi?",
-                    "Answer:": "3.14195"
-                },
-                {
-                    "Question:": "What is 2^3?",
-                    "Answer:": "8"
-                }
-            ]
-        },
-        {
-            "Name:": "Books Deck",
-            "Flashcards:": [{
-                "Question:": "Who wrote Harry Potter?",
-                "Answer:": "J.K. Rowling"
-            }]
-        }
-    ]
+    "FlashcardDeck:": [{
+        "Name:": "Harry Potter",
+        "Flashcards:": [
+            {
+                "Question:": "What house is Harry Potter in, in Hogwarts?",
+                "Answer:": "Gryffindor"
+            },
+            {
+                "Question:": "Who are Harry's best friends?",
+                "Answer:": "Hermione and Ron"
+            },
+            {
+                "Question:": "Who was the most annoying character?",
+                "Answer:": "Dobby"
+            }
+        ]
+    }]
 }

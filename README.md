@@ -45,4 +45,32 @@ after studying a Flashcard Deck.
 so or not.
 - As a user, I want to be able to load my Flashcard Decks from a previously saved file.
 
-  
+
+# Instructions for Grader
+
+- You can generate the first required action related to the user story "adding multiples X's to a Y", in this case adding
+multiple objects of FlashcardDeck class to FlashcardDecks class, by clicking on the button "Create a new Flashcard Deck"
+in the main menu when the application starts up. This will let you enter the name of the new FlashcardDeck you want to
+create. You can check that it has been created by clicking either on the button "Select an existing Flashcard Deck" or
+the button "Delete a Flashcard Deck", as both will show you a list of current FlashcardDecks to choose from.
+- You can generate the second required action related to the user story "adding multiples X's to a Y", in this case adding
+multiple objects of Flashcard class to FlashcardDeck class, by first clicking on "Select an existing Flashcard Deck" in
+the main menu once a FlashcardDeck object has been created, then in the next menu you can click on the button with the 
+name of the Flashcard Deck you would like to select to add a Flashcard to. Finally, in the next menu, you can click on the
+"Create a new Flashcard to add to this deck" button, which will ask you first to enter the question string of the Flashcard to
+be created, then will ask you to enter the answer string for the Flashcard to be created. The application will then ask 
+you to confirm if the entered text strings are correct before creating a new Flashcard and adding it to the current
+FlashcardDeck selected earlier. You can check if the newly created Flashcard has been added to the FlashcardDeck by clicking
+on the "Display a list of all Flashcards in this Deck to edit or delete" button in the same menu that the "Create a new
+Flashcard to add to this deck" button was located.
+- You can locate my visual component when you start the application. A splashscreen with an image saying "Flashcard App"
+will appear in the middle of your screen for 2 seconds, then it will fade away and the main menu of the application will
+appear.
+- You can save the state of my application by clicking on the "Save Flashcard Deck to file" button in the main menu. If 
+you are not in the main menu, clicking the pink colored buttons "Go back to previous menu" will eventually get you there.
+Additionally, when you click on the "Quit the application" button in the main menu, you will be prompted with a popup message
+box asking if you want to save any changes. The popup message has the options "Yes", "No", and "Cancel". Clicking "Yes" will
+save the current state of the application to file, clicking "No" will not save the current state of the application to file
+and will exit the application, clicking "Cancel" will cause the message box to disappear but will not exit the application.
+- You can reload the state of my application by clicking on the "Load Flashcard Deck from file" button in the main menu.
+If you are not in the main menu, clicking the pink colored buttons "Go back to previous menu" will eventually get you there.
