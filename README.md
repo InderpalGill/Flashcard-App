@@ -104,3 +104,24 @@ Created Flashcard Deck: Math Cards
   from Flashcard Deck Math Cards
 - Tue Apr 02 16:28:02 PDT 2024\
   Removed Flashcard Deck: Math Cards, from my Flashcard Decks
+
+
+## Phase 4, task 3
+If I had more time to work on the project, some of the design changes that I would make compared to the current program
+would be to utilize the Composite Design Pattern when making the GUI. As I was creating the GUI and all the different Menu
+options, I ended up replicating a lot of the same code, particularly each Menu had a similar constructor, and a similar
+placeMessage(), and similar placeButtons() method. These could have been included in an abstract class or an interface.
+In the UML diagram provided, there are 7 arrows that leave from FlashcardProgramUI and go to the different menus. As such,
+that would mean if there is a change to the program, all 7 menus would have to be changed one by one to make sure that there
+are no compiler errors. The composite design pattern could work by having an interface with the constructor, placeMessage(), and placeButtons() 
+methods, and then a MainMenu component and sub Menu leaves. This would help reduce redundant code, and make making changes
+to the existing code easier. Additionally, the UML diagram would be a lot more simplified with fewer arrows leaving from
+FlashcardProgramUI.
+
+Another way I could refactor the current design is to reduce coupling between the FlashcardProgramUI class and all other Menu classes.
+Currently, FlashcardProgramUI has fields for FlashcardDecks, FlashcardDeck(the current Deck object of the program), and 
+Flashcard(the current Card object of the program). Each Menu when created has a final field called "controller" that is of type 
+FlashcardProgramUI. The purpose of this field is so that each menu can access the FlashcardDecks, FlashcardDeck, and Flashcard
+fields of FlashcardProgramUI, therefore every menu class is coupled with the FlashcardProgramUI class. Reducing coupling between
+FlashcardProgramUI and the other Menu classes would help make the program more robust, as currently any changes to FlashcardProgramUI
+could result in compiler errors in all the other Menu classes.
