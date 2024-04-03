@@ -22,15 +22,19 @@ public class FlashcardDecks implements Writable {
     }
 
     //MODIFIES: this
-    //EFFECTS: Adds given FlashcardDeck to end of myFlashcardDecks.
+    //EFFECTS: Adds given FlashcardDeck to end of myFlashcardDecks, records Event on EventLog.
     public void addFlashcardDeck(FlashcardDeck f) {
+        EventLog.getInstance().logEvent(new Event("Added Flashcard Deck: " + f.getName()
+                + ", to my Flashcard Decks" + "\n"));
         myFlashcardDecks.add(f);
     }
 
     //REQUIRES: myFlashcardDecks size > 0
     //MODIFIES: this
-    //EFFECTS: Removes given FlashcardDeck from myFlashcardDecks
+    //EFFECTS: Removes given FlashcardDeck from myFlashcardDecks, records Event on EventLog
     public void removeFlashcardDeck(FlashcardDeck f) {
+        EventLog.getInstance().logEvent(new Event("Removed Flashcard Deck: " + f.getName()
+                + ", from my Flashcard Decks" + "\n"));
         myFlashcardDecks.remove(f);
     }
 

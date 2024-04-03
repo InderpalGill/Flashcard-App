@@ -21,12 +21,13 @@ public class FlashcardDeck implements Writable {
 
 
     //EFFECTS: Constructor for class. Creates a new deck of given name with list of no flashcards,
-    // correctTracker at zero, and sizeTracker at zero.
+    // correctTracker at zero, and sizeTracker at zero. Records Event on EventLog
     public FlashcardDeck(String name) {
         flashcardDeck = new ArrayList<>();
         this.name = name;
         this.correctTracker = 0;
         this.sizeTracker = 0;
+        EventLog.getInstance().logEvent(new Event("Created Flashcard Deck: " + this.name + "\n"));
     }
 
     //MODIFIES:this
@@ -39,20 +40,24 @@ public class FlashcardDeck implements Writable {
     }
 
     //MODIFIES: this
-    //EFFECTS: adds given flashcard to flashcardDeck, increases sizeTracker by 1
+    //EFFECTS: adds given flashcard to flashcardDeck, increases sizeTracker by 1, records Event on EventLog
     public void addCard(Flashcard f) {
+        EventLog.getInstance().logEvent(new Event("Added Flashcard, Question: " + f.getQuestion()
+                + "\n" + "Answer: " + f.getAnswer() + "\n" + "to Flashcard Deck: " + this.name + "\n"));
         flashcardDeck.add(f);
         sizeTracker += 1;
     }
 
     //REQUIRES: flashcardDeck size >= 1
     //MODIFIES: this
-    //EFFECTS: removes card of given question from flashcardDeck, reduces size tracker by 1
+    //EFFECTS: removes card of given question from flashcardDeck, reduces size tracker by 1, records Event on EventLog
     public void removeCard(String question) {
         ArrayList<Flashcard> match = new ArrayList<>();
         for (Flashcard f : flashcardDeck) {
             if (f.getQuestion().equals(question)) {
                 match.add(f);
+                EventLog.getInstance().logEvent(new Event("Removed Flashcard, Question: " + f.getQuestion()
+                        + "\n" + "Answer: " + f.getAnswer() + "\n" + "from Flashcard Deck " + this.name + "\n"));
                 sizeTracker--;
             }
         }
@@ -61,8 +66,10 @@ public class FlashcardDeck implements Writable {
 
     //REQUIRES: flashcardDeck size >= 1
     //MODIFIES: this
-    //EFFECTS: removes given Flashcard object from flashcardDeck, reduces size tracker by 1
+    //EFFECTS: removes given Flashcard object from flashcardDeck, reduces size tracker by 1, records Event on EventLog
     public void removeCard(Flashcard f) {
+        EventLog.getInstance().logEvent(new Event("Removed Flashcard, Question: " + f.getQuestion()
+                + "\n" + "Answer: " + f.getAnswer() + "\n" + "from Flashcard Deck " + this.name + "\n"));
         flashcardDeck.remove(f);
         sizeTracker--;
     }
@@ -81,8 +88,10 @@ public class FlashcardDeck implements Writable {
     }
 
     //MODIFIES: this
-    //EFFECTS: Sets name of FlashcardDeck
+    //EFFECTS: Sets name of FlashcardDeck, records Event on EventLog
     public void setName(String s) {
+        EventLog.getInstance().logEvent(new Event("Flashcard Deck name: "
+                + name + "\n" + "has been changed to: " + s + "\n"));
         name = s;
     }
 

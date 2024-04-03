@@ -1,5 +1,7 @@
 package ui;
 
+import model.Event;
+import model.EventLog;
 import model.Flashcard;
 import model.FlashcardDeck;
 import model.FlashcardDecks;
@@ -32,6 +34,7 @@ public class FlashcardProgramUI extends JFrame {
     JsonReader jsonReader;
     JsonWriter jsonWriter;
     ImageIcon imageIcon;
+    EventLog eventLog;
 
     //EFFECTS: Constructor for class. Initializes all fields, loads from JSON_STORE, displays SplashScreen, sets
     //JFrame height and width, displays MainMenu
@@ -46,6 +49,8 @@ public class FlashcardProgramUI extends JFrame {
         }
         imageIcon = new ImageIcon("./data/FlashcardSplashPage.png");
         new SplashScreen(imageIcon);
+        addWindowListener(new WindowCloser(this));
+        eventLog = EventLog.getInstance();
         this.add(displayMainMenu());
         this.setMainMenu();
         this.windowTracker = 0;
@@ -272,16 +277,23 @@ public class FlashcardProgramUI extends JFrame {
     }
 
     //EFFECTS: Displays message prompting user to save before exiting, if user selects YES, data will be saved before
-    //exiting, if user selects NO, the program will close, if user selects CANCEL, return to main menu.
+    //exiting, if user selects NO, the program will close, if user selects CANCEL, return to main menu. Prints EventLog
+    //to console when window is closed
     protected void quit() {
         int a = JOptionPane.showConfirmDialog(this, "Any unsaved data will be deleted, "
                 + "would you like to save?");
         if (a == JOptionPane.YES_OPTION) {
             this.saveFlashcardDeck();
+            for (Event e : eventLog) {
+                System.out.println(e);
+            }
             System.exit(0);
         } else if (a == JOptionPane.CANCEL_OPTION) {
             this.returnToMainMenu();
         } else {
+            for (Event e : eventLog) {
+                System.out.println(e);
+            }
             System.exit(0);
         }
     }

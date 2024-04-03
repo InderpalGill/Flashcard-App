@@ -74,3 +74,33 @@ save the current state of the application to file, clicking "No" will not save t
 and will exit the application, clicking "Cancel" will cause the message box to disappear but will not exit the application.
 - You can reload the state of my application by clicking on the "Load Flashcard Deck from file" button in the main menu.
 If you are not in the main menu, clicking the pink colored buttons "Go back to previous menu" will eventually get you there.
+
+## Phase 4, task 2
+- Please find below a sample of the events logged and printed to the console when the program runs.
+- Tue Apr 02 16:25:16 PDT 2024\
+Created Flashcard Deck: Math Cards
+- Tue Apr 02 16:25:16 PDT 2024\
+  Added Flashcard Deck: Math Cards, to my Flashcard Decks
+- Tue Apr 02 16:25:47 PDT 2024\
+  Created Flashcard, Question: What is Pythagoras's Theorem?\
+  Answer: a^2 + b^2 = c^2
+- Tue Apr 02 16:25:47 PDT 2024\
+  Added Flashcard, Question: What is Pythagoras's Theorem?\
+  Answer: a^2 + b^2 = c^2\
+  to Flashcard Deck: Math Cards
+- Tue Apr 02 16:26:59 PDT 2024\
+  Created Flashcard, Question: How do you find the length of the opposite side of a triangle?\
+  Answer: Hypotneus * cos(angle)
+- Tue Apr 02 16:26:59 PDT 2024\
+  Added Flashcard, Question: How do you find the length of the opposite side of a triangle?\
+  Answer: Hypotneus * cos(angle)\
+  to Flashcard Deck: Math Cards
+- Tue Apr 02 16:27:22 PDT 2024\
+  Flashcard Answer: Hypotneus * cos(angle)\
+  has been changed to: Hypoteneus * sin(angle)
+- Tue Apr 02 16:27:47 PDT 2024\
+  Removed Flashcard: Question: How do you find the length of the opposite side of a triangle?\
+  Answer: Hypoteneus * sin(angle)\
+  from Flashcard Deck Math Cards
+- Tue Apr 02 16:28:02 PDT 2024\
+  Removed Flashcard Deck: Math Cards, from my Flashcard Decks

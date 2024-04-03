@@ -17,10 +17,13 @@ public class Flashcard implements Writable {
 
 
     //EFFECTS: Constructor for class. Creates flashcard with given question and answer, and isCorrect set to false
+    // records Event on EventLog
     public Flashcard(String question, String answer) {
         this.question = question;
         this.answer = answer;
         this.isCorrect = false;
+        EventLog.getInstance().logEvent(new Event("Created Flashcard, Question: "
+                + question + "\n" + "Answer: " + answer + "\n"));
     }
 
     //EFFECTS: returns question for card
@@ -34,14 +37,18 @@ public class Flashcard implements Writable {
     }
 
     //MODIFIES: this
-    //EFFECTS: Sets the parameter value as the question for a card
+    //EFFECTS: Sets the parameter value as the question for a card, records Event on EventLog
     public void setQuestion(String newQuestion) {
+        EventLog.getInstance().logEvent(new Event("Flashcard Question: "
+                + question + "\n" + "has been changed to: " + newQuestion + "\n"));
         this.question = newQuestion;
     }
 
     //MODIFIES: this
-    //EFFECTS: Sets the parameter value as the answer for a card
+    //EFFECTS: Sets the parameter value as the answer for a card, records Event on EventLog
     public void setAnswer(String newAnswer) {
+        EventLog.getInstance().logEvent(new Event("Flashcard Answer: "
+                + answer + "\n" + "has been changed to: " + newAnswer + "\n"));
         this.answer = newAnswer;
     }
 
